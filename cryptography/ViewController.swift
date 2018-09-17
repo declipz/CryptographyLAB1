@@ -7,21 +7,8 @@
 //
 
 import Cocoa
-/*
-let mainWindowController = MainWindowController()
-let encodeViewController = EncodeViewController()
-let decodeViewController = DecodeViewController()
-*/
 
 
-extension Character {
-    var code: Int {
-        get {
-            let s = String(self).unicodeScalars
-            return Int(s[s.startIndex].value)
-        }
-    }
-}
 
 
 class ViewController: NSViewController {
@@ -180,8 +167,12 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(encodeText("HELLO WORLD", 3, 5, 26))
-        print(decodeText("MXGGV JVKGS", 3, 5, 26))
+        let encodedText = Encoder.encodeText("HELLO WORLD", with: 3, and: 5, by: 26)
+        print(Encoder.decodeText(encodedText, with: 3, and: 5, by: 26))
+        
+        
+        
+        
     }
 
     override var representedObject: Any? {

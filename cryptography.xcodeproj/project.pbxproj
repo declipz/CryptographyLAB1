@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D67E7B7721501A06002B6B6A /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67E7B7621501A06002B6B6A /* Encoder.swift */; };
 		D6CE270A2142BB0F00D647E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CE27092142BB0F00D647E2 /* AppDelegate.swift */; };
 		D6CE270C2142BB0F00D647E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CE270B2142BB0F00D647E2 /* ViewController.swift */; };
 		D6CE270E2142BB1200D647E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6CE270D2142BB1200D647E2 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D67E7B7621501A06002B6B6A /* Encoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
 		D6CE27062142BB0F00D647E2 /* cryptography.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cryptography.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6CE27092142BB0F00D647E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6CE270B2142BB0F00D647E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				D6CE270F2142BB1200D647E2 /* Main.storyboard */,
 				D6CE27122142BB1200D647E2 /* Info.plist */,
 				D6CE27132142BB1200D647E2 /* cryptography.entitlements */,
+				D67E7B7621501A06002B6B6A /* Encoder.swift */,
 			);
 			path = cryptography;
 			sourceTree = "<group>";
@@ -135,6 +138,7 @@
 			files = (
 				D6CE270C2142BB0F00D647E2 /* ViewController.swift in Sources */,
 				D6CE270A2142BB0F00D647E2 /* AppDelegate.swift in Sources */,
+				D67E7B7721501A06002B6B6A /* Encoder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
