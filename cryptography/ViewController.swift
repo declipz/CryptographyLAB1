@@ -8,29 +8,6 @@
 
 import Cocoa
 
-extension Int {
-    // Euclidian equation for Greatest Common Divisor
-    static func gcd(_ firstNumber: Int, with secondNumber: Int) -> Int {
-        var buffer: Int = 0
-        var x = firstNumber
-        var y = secondNumber
-        while y != 0 {
-            buffer = y
-            y = x % y
-            x = buffer
-        }
-        return x
-    }
-    
-    static func isMutuallyPrimal(_ firstNumber: Int, and secondNumber: Int) -> Bool {
-        if Int.gcd(firstNumber, with: secondNumber) == 1 {
-            return true
-        }
-        return false
-    }
-}
-
-
 class ViewController: NSViewController {
     
     // Encoding fields
@@ -47,7 +24,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var decodingModuleField: NSTextField!
     @IBOutlet weak var decodingSourceTextField: NSTextField!
     
-    let punctuationMarks = [",", ".", " ", "!", "?", ":", ";"]
+    let encoder = Encoder()
     
     @IBAction func encodeButtonAction(_ sender: NSButton) {
         let sourceText = encodingSourceTextField.stringValue
@@ -55,13 +32,16 @@ class ViewController: NSViewController {
             let firstKey = Int(encodingFirstKeyField.stringValue),
             let secondKey = Int(encodingSecondKeyField.stringValue),
             let module = Int(encodingModuleField.stringValue),
-            module == 26 || module == 33,
-            Int.isMutuallyPrimal(firstKey, and: module) == true,
-            Int.isMutuallyPrimal(secondKey, and: module) == true else {
+            module == 26 || module == 33 else {
                 return
         }
         
-        let encodedText = Encoder.encodeText(sourceText, with: firstKey, and: secondKey, by: module)
+        /*
+         Int.isMutuallyPrimal(firstKey, and: module) == true,
+         Int.isMutuallyPrimal(secondKey, and: module) == true
+        */
+        
+        let encodedText = encoder.encodeText(sourceText, with: firstKey, and: secondKey, by: module)
         encodingEncodedTextField.stringValue = encodedText
     }
     
@@ -72,18 +52,23 @@ class ViewController: NSViewController {
             let firstKey = Int(decodingFirstKeyField.stringValue),
             let secondKey = Int(decodingSecondKeyField.stringValue),
             let module = Int(decodingModuleField.stringValue),
-            module == 26 || module == 33,
-            Int.isMutuallyPrimal(firstKey, and: module) == true,
-            Int.isMutuallyPrimal(secondKey, and: module) == true else {
+            module == 26 || module == 33 else {
                 return
         }
         
-        let decodedText = Encoder.decodeText(encodedText, with: firstKey, and: secondKey, by: module)
+        let decodedText = encoder.decodeText(encodedText, with: firstKey, and: secondKey, by: module)
         decodingSourceTextField.stringValue = decodedText
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let symbol: Character = "a"
+        print(symbol.code)
+        let characterIndex = symbol.code - 97
+        let newSymbolCode = (characterIndex * 3 + 5) % 26 + 97
+        print(newSymbolCode)
+        let newSymbol = Character(UnicodeScalar(newSymbolCode)!)
+        print(newSymbol)
     }
 
     override var representedObject: Any? {

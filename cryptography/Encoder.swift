@@ -8,33 +8,19 @@
 
 import Foundation
 
-extension Character {
-    var code: Int {
-        get {
-            let s = String(self).unicodeScalars
-            return Int(s[s.startIndex].value)
-        }
-    }
-}
-
 class Encoder {
-    static let punctuationMarks = [",", ".", " ", "!", "?", ":", ";"]
+    private let punctuationMarks = [",", ".", " ", "!", "?", ":", ";"]
+    private let russianAlphabetOffset = 1040
+    private let englishAlphabetOffset = 65
     
-    static func encodeText(_ sourceText: String, with firstKey: Int, and secondKey: Int, by module: Int) -> String {
+    func encodeText(_ sourceText: String, with firstKey: Int, and secondKey: Int, by module: Int) -> String {
         var indexOffset: Int = 0;
-        var maxIndexLimit: Int = 0;
         
         if module == 26 {
-            indexOffset = 65
-            maxIndexLimit = 25
+            indexOffset = englishAlphabetOffset
         }
         else if module == 33 {
-            indexOffset = 1040
-            maxIndexLimit = 31
-        }
-        else {
-            // Make an error
-            //throw ""
+            indexOffset = russianAlphabetOffset
         }
         
         var encodedText: String = ""
@@ -43,11 +29,17 @@ class Encoder {
                 encodedText += String(symbol)
                 continue
             }
-            let characterIndex = symbol.code - indexOffset
-            if characterIndex < 0 || characterIndex > maxIndexLimit {
-                // Make an error
+            var characterIndex = symbol.code - indexOffset
+            var lowerCased = false
+            if characterIndex >= 32 {
+                lowerCased = true
+                characterIndex -= 32
             }
-            let newSymbolCode = (characterIndex * secondKey + firstKey) % module + indexOffset
+            
+            var newSymbolCode = (characterIndex * secondKey + firstKey) % module + indexOffset
+            if lowerCased {
+                newSymbolCode += 32
+            }
             let newSymbol = Character(UnicodeScalar(newSymbolCode)!)
             encodedText += String(newSymbol)
         }
@@ -55,17 +47,14 @@ class Encoder {
         return encodedText
     }
     
-    static func decodeText(_ encodedText: String, with firstKey: Int, and secondKey: Int, by module: Int) -> String {
+    func decodeText(_ encodedText: String, with firstKey: Int, and secondKey: Int, by module: Int) -> String {
         var indexOffset: Int = 0;
         
         if module == 26 {
-            indexOffset = 65
+            indexOffset = englishAlphabetOffset
         }
         else if module == 33 {
-            indexOffset = 1040
-        }
-        else {
-            // make an error
+            indexOffset = russianAlphabetOffset
         }
         
         var decodedText: String = ""
@@ -77,11 +66,19 @@ class Encoder {
             }
             var makingCalculations = true
             while makingCalculations {
-                let characterIndex = symbol.code - indexOffset
+                var characterIndex = symbol.code - indexOffset
+                var lowerCased = false
+                if characterIndex >= 32 {
+                    lowerCased = true
+                    characterIndex -= 32
+                }
                 
                 let decodedIndex = module * wholePart + characterIndex - firstKey
                 if decodedIndex >= 0 && decodedIndex % secondKey == 0 {
-                    let decodedSymbolCode = Int(decodedIndex / secondKey) + indexOffset
+                    var decodedSymbolCode = Int(decodedIndex / secondKey) + indexOffset
+                    if lowerCased {
+                        decodedSymbolCode += 32
+                    }
                     let decodedSymbol = Character(UnicodeScalar(decodedSymbolCode)!)
                     decodedText += String(decodedSymbol)
                     makingCalculations = false
