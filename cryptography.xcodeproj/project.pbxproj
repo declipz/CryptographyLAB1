@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D6053E762153B2A9007C68E4 /* DialogWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6053E752153B2A9007C68E4 /* DialogWindow.swift */; };
 		D67E7B7721501A06002B6B6A /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67E7B7621501A06002B6B6A /* Encoder.swift */; };
 		D6CE270A2142BB0F00D647E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CE27092142BB0F00D647E2 /* AppDelegate.swift */; };
 		D6CE270C2142BB0F00D647E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CE270B2142BB0F00D647E2 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D6053E752153B2A9007C68E4 /* DialogWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogWindow.swift; sourceTree = "<group>"; };
 		D67E7B7621501A06002B6B6A /* Encoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
 		D6CE27062142BB0F00D647E2 /* cryptography.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cryptography.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6CE27092142BB0F00D647E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				D67E7B7621501A06002B6B6A /* Encoder.swift */,
 				D6E5225B2150F56F0011E177 /* Int+MutuallyPrimal.swift */,
 				D6E5225D215100930011E177 /* Character+Code.swift */,
+				D6053E752153B2A9007C68E4 /* DialogWindow.swift */,
 			);
 			path = cryptography;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6CE270C2142BB0F00D647E2 /* ViewController.swift in Sources */,
+				D6053E762153B2A9007C68E4 /* DialogWindow.swift in Sources */,
 				D6CE270A2142BB0F00D647E2 /* AppDelegate.swift in Sources */,
 				D6E5225E215100930011E177 /* Character+Code.swift in Sources */,
 				D67E7B7721501A06002B6B6A /* Encoder.swift in Sources */,

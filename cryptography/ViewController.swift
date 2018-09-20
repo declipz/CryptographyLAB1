@@ -27,19 +27,24 @@ class ViewController: NSViewController {
     let encoder = Encoder()
     
     @IBAction func encodeButtonAction(_ sender: NSButton) {
+        encodingEncodedTextField.stringValue = ""
+        
         let sourceText = encodingSourceTextField.stringValue
         guard sourceText.isEmpty == false,
             let firstKey = Int(encodingFirstKeyField.stringValue),
             let secondKey = Int(encodingSecondKeyField.stringValue),
             let module = Int(encodingModuleField.stringValue),
-            module == 26 || module == 33 else {
+            module == 26 || module == 33,
+            firstKey < module && secondKey < module else {
                 return
         }
         
-        /*
-         Int.isMutuallyPrimal(firstKey, and: module) == true,
-         Int.isMutuallyPrimal(secondKey, and: module) == true
-        */
+        let dialogWindow = DialogWindow(question: "Continue?", text: "One of your keys are not mutually primal with module. Result may be incorrect. Do you want to continue?")
+        if !Int.isMutuallyPrimal(firstKey, and: module) || !Int.isMutuallyPrimal(secondKey, and: module) {
+            if dialogWindow.ask() == false {
+                return
+            }
+        }
         
         let encodedText = encoder.encodeText(sourceText, with: firstKey, and: secondKey, by: module)
         encodingEncodedTextField.stringValue = encodedText
@@ -47,13 +52,23 @@ class ViewController: NSViewController {
     
     
     @IBAction func decodeButtonAction(_ sender: NSButton) {
+        decodingSourceTextField.stringValue = ""
+        
         let encodedText = decodingEncodedTextField.stringValue
         guard encodedText.isEmpty == false,
             let firstKey = Int(decodingFirstKeyField.stringValue),
             let secondKey = Int(decodingSecondKeyField.stringValue),
             let module = Int(decodingModuleField.stringValue),
-            module == 26 || module == 33 else {
+            module == 26 || module == 33,
+            firstKey < module && secondKey < module else {
                 return
+        }
+        
+        let dialogWindow = DialogWindow(question: "Continue?", text: "One of your keys are not mutually primal with module. Result may be incorrect. Do you want to continue?")
+        if !Int.isMutuallyPrimal(firstKey, and: module) || !Int.isMutuallyPrimal(secondKey, and: module) {
+            if dialogWindow.ask() == false {
+                return
+            }
         }
         
         let decodedText = encoder.decodeText(encodedText, with: firstKey, and: secondKey, by: module)
@@ -62,14 +77,8 @@ class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let symbol: Character = "a"
-        print(symbol.code)
-        let characterIndex = symbol.code - 97
-        let newSymbolCode = (characterIndex * 3 + 5) % 26 + 97
-        print(newSymbolCode)
-        let newSymbol = Character(UnicodeScalar(newSymbolCode)!)
-        print(newSymbol)
     }
+    
 
     override var representedObject: Any? {
         didSet {
